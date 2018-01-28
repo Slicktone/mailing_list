@@ -35,6 +35,23 @@ app.get("/", function(req, res) {
 });
 
 
+app.post("/register", function(req, res) {
+// creating the person variable for body
+    var person = {
+            email: req.body.email
+    };
+// Some TESTING for the register route and storing of emails with req.body
+    // var email = req.body.email;
+    // console.log("POST REQUEST SET TO /REGISTER and the Email is " + req.body.email);
+
+    // dynamically inserting the data with mySQL and redirecting back home
+    connection.query('INSERT INTO users SET ?', person, function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        // Take me back home once data is inserted
+        res.redirect("/");
+    });
+});
 
 
 
